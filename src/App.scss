@@ -1,0 +1,20 @@
+/* 使用伪元素来设置背景透明，而内容不透明 */
+.App::before {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url('./asset/sun.svg') repeat;
+  animation: background-scroll 6s infinite;
+  animation-timing-function: linear;
+  content: '';
+  z-index: -1;
+  /*设置该标签等级，让其始终位于最后面*/
+  filter: opacity(35%);
+}
+/*背景滚动动画 */
+/* 图片切成50px，同时不用from to指定起始，这样结束的部分就是下一个的开始 */
+@keyframes background-scroll {
+  100% {
+    background-position: 50px 50px;
+  }
+}

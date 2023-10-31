@@ -1,0 +1,32 @@
+.music-player-info {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .details-img img {
+    max-width: 100%;
+    .details-img--image {
+      width: 10rem;
+      height: auto;
+    }
+  }
+
+  /* 作品信息，标题与作者*/
+  .artist-info {
+    padding-top: 1.5rem;
+    padding-bottom: 1.25rem;
+    text-align: center;
+
+    .details-title {
+      margin-bottom: 0.5rem;
+    }
+
+    .details-artist {
+      font-size: 0.75rem;
+      font-weight: 300;
+      color: #666;
+    }
+  }
+}
