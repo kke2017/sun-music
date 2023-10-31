@@ -11,11 +11,6 @@ function Layout () {
   const handleChange = e => {
     setSearchInput( e.target.value )
   }
-
-  const getSearchRes = function () {
-    console.log( searchInput )
-    // console.log( props )
-  }
   return (
     <>
       <div className="layout">
@@ -30,9 +25,7 @@ function Layout () {
 
         {/* es6不支持在<img />标签内直接写图片的路径，如<img src="../images/photo.png"/> 会引入不了 */ }
         <Link to={ `/search?input=${ searchInput }` } >
-          <img className="searchImg"
-            src={ searchImg }
-            onClick={ getSearchRes }></img>
+          <img className="searchImg" src={ searchImg }></img>
         </Link>
       </div>
     </>

@@ -2,24 +2,48 @@
   margin: 0;
   padding: 0;
 }
+// .layout {
+//   margin-left: 2rem;
+//   width: 800px;
+//   height: 100px;
+//   position: absolute;
+//   top: 50%;
+//   left: 60%;
+//   transform: translate(-50%, -50%);
+//   display: flex;
+//   .layoutInput {
+//     width: 800px;
+//     height: 72px;
+//     opacity: 0.8;
+//     margin-bottom: 10px;
+//     flex: 1;
+//   }
+//   .searchImg {
+//     width: 65px;
+//     height: 65px;
+//     margin-bottom: 20px;
+//     margin-left: 20px;
+//   }
+// }
 .layout {
-  width: 800px;
-  height: 100px;
+  margin-left: 2rem;
+  width: 35rem;
+  height: 6rem;
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 60%;
   transform: translate(-50%, -50%);
   display: flex;
   .layoutInput {
-    width: 800px;
-    height: 72px;
+    width: 35rem;
+    height: 3rem;
     opacity: 0.8;
     margin-bottom: 10px;
     flex: 1;
   }
   .searchImg {
-    width: 65px;
-    height: 65px;
+    width: 2.5rem;
+    height: 2.5rem;
     margin-bottom: 20px;
     margin-left: 20px;
   }

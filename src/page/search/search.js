@@ -12,12 +12,12 @@ function SearchRes ( props ) {
   // 拿到search页面的input数据
   const [ searchInput, setSearchInput ] = useState( '' )
   //实现播放歌曲功能,修改id
-  const [ curId, setCurId ] = useState( '1454573250' )
-  //歌曲的基本信息显示：封面，作者，标题
-  const [ curArtist, setCurArtist ] = useState( "乃木坂46" )
-  const [ curTitle, setCurTitle ] = useState( "帰り道は遠回りしたくなる" )
-  const [ curAlbumID, setCurAlbumID ] = useState( '90692083' )
-
+  // const [ curId, setCurId ] = useState( '1454573250' )
+  // //歌曲的基本信息显示：封面，作者，标题
+  // const [ curArtist, setCurArtist ] = useState( "乃木坂46" )
+  // const [ curTitle, setCurTitle ] = useState( "帰り道は遠回りしたくなる" )
+  // const [ curAlbumID, setCurAlbumID ] = useState( '90692083' )
+  const { curId, setCurId, curArtist, setCurArtist, curTitle, setCurTitle, curAlbumID, setCurAlbumID } = props
   //处理input数据
   const handlerChange = e => {
     setSearchInput( e.target.value )
@@ -87,12 +87,12 @@ function SearchRes ( props ) {
 
   return (
     <div className="search">
-      <Player
+      {/* <Player
         id={ curId }
         artist={ curArtist }
         title={ curTitle }
         albumID={ curAlbumID }
-      ></Player>
+      ></Player> */}
       <Card className="searchCompo">
         <Search
           className="searchBar"
