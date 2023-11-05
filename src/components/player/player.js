@@ -51,7 +51,6 @@ function Player ( props ) {
         <audio
           src={ audioUrl }
           ref={ audioRef }
-          controls
         ></audio>
         <PlayerControl
           isPlaying={ isPlaying }
