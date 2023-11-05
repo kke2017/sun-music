@@ -129,14 +129,14 @@ function Search ( props ) {
           <button className="handler"
             onClick={ () => {
               setCurId( record.id )
-              if ( isValid ) {
-                setCurArtist( record.artists[ 0 ].name )
-                setCurTitle( record.name )
-                setCurAlbumID( record.album.id )
-                delayPlay()
-              } else {
-                info()
-              }
+              // if ( isValid ) {
+              setCurArtist( record.artists[ 0 ].name )
+              setCurTitle( record.name )
+              setCurAlbumID( record.album.id )
+              delayPlay()
+              // } else {
+              //   info()
+              // }
               // console.log( record.id )
             } }>
             <FontAwesomeIcon icon={ faPlay } title='播放' />
