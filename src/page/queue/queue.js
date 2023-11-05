@@ -61,9 +61,9 @@ function Queue ( props ) {
           <button className="handler"
             onClick={ () => {
               setCurId( record.id )
-              setCurArtist( record.artists[ 0 ].name )
+              setCurArtist( record.artists )
               setCurTitle( record.name )
-              setCurAlbumID( record.album.id )
+              setCurAlbumID( record.albumID )
               delayPlay()
             } }>
             <FontAwesomeIcon icon={ faPlay } title='播放' />
