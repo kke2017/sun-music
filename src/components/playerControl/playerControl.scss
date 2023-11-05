@@ -7,7 +7,7 @@
     padding: 1.2rem;
     margin-left: 2rem;
     margin-right: 2rem;
-    font-size: 0.8rem;
+    // font-size: 0.8rem;
     border: none;
     background: none;
     border-radius: 50%;
@@ -38,5 +38,23 @@
     color: rgba(171, 2, 26, 0.95);
     box-shadow: 0 6px 9px rgba(33, 33, 33, 0.1),
       0 6px 16px rgba(33, 33, 33, 0.15);
+  }
+}
+.player__footer {
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+  padding-right: 2rem;
+  padding-left: 2rem;
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  .link {
+    transition: all 0.25s cubic-bezier(0.4, 0, 1, 1);
+    border: none;
+    background-color: white;
+  }
+  .link:focus,
+  .link:hover {
+    color: #d30320;
   }
 }

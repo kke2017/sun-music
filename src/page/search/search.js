@@ -1,23 +1,32 @@
-import React from "react"
+import React, { useRef, useState, useEffect } from "react"
 import './search.scss'
-import { Input, Table, Card, Space, Button } from "antd"
-import Player from "@/components/player/player"
-import { useState, useEffect } from "react"
+import { Input, Table, Card, Space, message } from "antd"
 import { useLocation } from "react-router-dom"
 import { http } from "@/util/http"
-import { faPlay } from "@fortawesome/free-solid-svg-icons"
+import { faPlay, faHeart } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-function SearchRes ( props ) {
+
+
+function Search ( props ) {
   const { Search } = Input
   // 拿到search页面的input数据
   const [ searchInput, setSearchInput ] = useState( '' )
-  //实现播放歌曲功能,修改id
-  // const [ curId, setCurId ] = useState( '1454573250' )
-  // //歌曲的基本信息显示：封面，作者，标题
-  // const [ curArtist, setCurArtist ] = useState( "乃木坂46" )
-  // const [ curTitle, setCurTitle ] = useState( "帰り道は遠回りしたくなる" )
-  // const [ curAlbumID, setCurAlbumID ] = useState( '90692083' )
-  const { curId, setCurId, curArtist, setCurArtist, curTitle, setCurTitle, curAlbumID, setCurAlbumID } = props
+  // 无版权的全局提示
+  const [ messageApi, contextHolder ] = message.useMessage()
+  const info = () => {
+    messageApi.info( '抱歉，暂无版权!' )
+  }
+  // 在不知道音乐是否有版权之前，先放到一个checkId里面等待校验
+  // const [ checkId, setCheckId ] = useState( '1454573250' )
+  const { setCurId,
+    setCurArtist,
+    setCurTitle,
+    setCurAlbumID,
+    setIsPlaying,
+    isValid,
+    list, setList,
+    listSongsId, setListSongsId
+  } = props
   //处理input数据
   const handlerChange = e => {
     setSearchInput( e.target.value )
@@ -33,7 +42,8 @@ function SearchRes ( props ) {
       {
         params: {
           keywords: value,
-          limit: 10
+          limit: 50,
+          realIP: '116.25.146.177'
         }
       } )
     setSongsList( res.data.result.songs )
@@ -46,40 +56,94 @@ function SearchRes ( props ) {
   useEffect( () => {
     loadList( inputValue )
   }, [ inputValue ] )
+  // 拿到最新的添加到播放列表的数据
+  const curAddToList = useRef( '' )
+  // 添加歌曲到播放列表
+  const addToList = ( song ) => {
+    curAddToList.current = song.id
+    setListSongsId( song.id )
+    setList( () => {
+      if ( curAddToList.current !== listSongsId ) {
+        return [
+          ...list,
+          {
+            id: song.id,
+            name: song.name,
+            artists: song.artists[ 0 ].name,
+            album: song.album.name,
+            albumID: song.album.id
+          }
+        ]
+      } else {
+        return [ ...list ]
+      }
+    } )
+  }
+  // 判断有无版权，无版权则不进行歌曲信息展示，并且跳出提示,这个接口不准确，改为用url判断
+  // useEffect( () => {
+  //   const isValid = async ( curId ) => {
+  //     const res = await http.get( '/song/url/v1',
+  //       {
+  //         params: {
+  //           id: curId,
+  //           level: "standard"
+  //         }
+  //       } )
+  //     const data = res.data.data[ 0 ].url
+  //     console.log( data )
+  //     setIsSuccess( data !== null )
+  //   }
+  //   isValid( checkId )
+  // }, [ checkId ] )
+
+  // 延迟播放函数
+  const delayPlay = async function () {
+    // 注意这里必须强制变一次isPlaying状态，否则触发不了useEffect
+    setIsPlaying( false )
+    let play = await new Promise( () => setTimeout( () => setIsPlaying( true ), 2500 ) )
+    // 播放了就把定时器清除掉
+    return clearTimeout( play )
+  }
   //数据处理，用于表格渲染
   const columns = [
     {
-      key: 'name',
       title: '标题',
       dataIndex: 'name',
-      width: 200,
+      width: 260,
     },
     {
-      key: 'artist',
       title: '歌手',
       dataIndex: [ 'artists', [ 0 ], 'name' ],
       width: 220
     },
     {
-      key: 'album',
       title: '专辑',
       dataIndex: [ 'album', 'name' ],
       width: 400
     },
     {
       title: '操作',
-      key: 'action',
       render: ( _, record ) => (
-        <Space size="large">
-          <a onClick={ () => {
-            setCurId( record.id )
-            setCurArtist( record.artists[ 0 ].name )
-            setCurTitle( record.name )
-            setCurAlbumID( record.album.id )
-            // console.log( record )
-          } }>
-            <FontAwesomeIcon icon={ faPlay } />
-          </a>
+        <Space size="middle">
+          { contextHolder }
+          <button className="handler"
+            onClick={ () => {
+              setCurId( record.id )
+              if ( isValid ) {
+                setCurArtist( record.artists[ 0 ].name )
+                setCurTitle( record.name )
+                setCurAlbumID( record.album.id )
+                delayPlay()
+              } else {
+                info()
+              }
+              // console.log( record.id )
+            } }>
+            <FontAwesomeIcon icon={ faPlay } title='播放' />
+          </button>
+          <button className="heart"
+            onClick={ () => addToList( record ) }
+          ><FontAwesomeIcon icon={ faHeart } title="添加到歌单" /></button>
         </Space>
       ),
     }
@@ -87,12 +151,6 @@ function SearchRes ( props ) {
 
   return (
     <div className="search">
-      {/* <Player
-        id={ curId }
-        artist={ curArtist }
-        title={ curTitle }
-        albumID={ curAlbumID }
-      ></Player> */}
       <Card className="searchCompo">
         <Search
           className="searchBar"
@@ -107,22 +165,21 @@ function SearchRes ( props ) {
         />
         <Table
           className="table"
-          size="small"
+          size="middle"
           rowKey='id'
           columns={ columns }
           dataSource={ songsList }
-          // pagination={
-          //   {
-          //     pageSize: params.per_page,
-          //     total: articleData.count,
-          //     onChange: pageChange,
-          //     current: params.page
-          //   }
-          // }
+          pagination={
+            {
+              pageSize: 10,
+              total: 50,
+              position: [ "none", "bottomCenter" ]
+            }
+          }
           bordered
         />
       </Card>
     </div>
   )
 }
-export default SearchRes 
+export default Search

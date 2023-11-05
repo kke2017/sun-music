@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^13.5.0",
     "antd": "^5.10.2",
     "axios": "^1.6.0",
+    "babel-plugin-macros": "^3.1.0",
     "fancy-components": "^0.0.23",
     "fortawesome": "^0.0.1-security",
     "mobx": "^6.10.2",
@@ -20,6 +21,8 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.17.0",
     "react-scripts": "5.0.1",
+    "react-use-observer": "^2.2.4",
+    "resize-observer-polyfill": "^1.5.1",
     "util": "^0.12.5",
     "web-vitals": "^2.1.4"
   },

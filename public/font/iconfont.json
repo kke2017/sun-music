@@ -1,0 +1,58 @@
+{
+  "id": "4312121",
+  "name": "no name",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "577357",
+      "name": "删除",
+      "font_class": "shanchu",
+      "unicode": "e74b",
+      "unicode_decimal": 59211
+    },
+    {
+      "icon_id": "7594078",
+      "name": "24gl-repeatOnce",
+      "font_class": "24gl-repeatOnce",
+      "unicode": "ea76",
+      "unicode_decimal": 60022
+    },
+    {
+      "icon_id": "7629060",
+      "name": "列表",
+      "font_class": "liebiao1",
+      "unicode": "e6b6",
+      "unicode_decimal": 59062
+    },
+    {
+      "icon_id": "2380683",
+      "name": "循环",
+      "font_class": "xunhuan1",
+      "unicode": "e623",
+      "unicode_decimal": 58915
+    },
+    {
+      "icon_id": "7594081",
+      "name": "24gl-shuffle",
+      "font_class": "24gl-shuffle",
+      "unicode": "ea75",
+      "unicode_decimal": 60021
+    },
+    {
+      "icon_id": "918722",
+      "name": "爱心",
+      "font_class": "aixin",
+      "unicode": "e663",
+      "unicode_decimal": 58979
+    },
+    {
+      "icon_id": "8288820",
+      "name": "爱心",
+      "font_class": "aixin1",
+      "unicode": "e83f",
+      "unicode_decimal": 59455
+    }
+  ]
+}

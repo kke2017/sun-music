@@ -1,4 +1,4 @@
-.music-player-info {
+.playerInfo {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -8,7 +8,7 @@
   .details-img img {
     max-width: 100%;
     .details-img--image {
-      width: 10rem;
+      width: 100%;
       height: auto;
     }
   }

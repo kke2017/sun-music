@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react"
 import './playerInfo.scss'
-import imgUrl from '@/asset/sun.svg'
 import { http } from "@/util/http"
 
 function PlayerInfo ( props ) {
@@ -13,6 +12,7 @@ function PlayerInfo ( props ) {
         {
           params: {
             id: albumID,
+            realIP: '116.25.146.177'
           }
         } )
       setCurImgUrl( res.data.album.picUrl )
@@ -21,7 +21,7 @@ function PlayerInfo ( props ) {
   }, [ albumID ] )
 
   return (
-    <div className="music-player-info">
+    <div className="playerInfo">
       <div className="details-img">
         <img
           className="details-img--image"
@@ -29,11 +29,9 @@ function PlayerInfo ( props ) {
           alt={ "封面" }
         />
       </div>
-      <div class="range"></div>
       <div className="artist-info">
         <h3 className="details-title">{ title }</h3>
         <h4 className="details-artist">{ artist }</h4>
-        <div class="line"></div>
       </div>
     </div>
   )
